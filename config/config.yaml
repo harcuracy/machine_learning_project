@@ -6,3 +6,12 @@ data_ingestion:
   source_URL: https://github.com/harcuracy/wine_repo/raw/refs/heads/main/archive.zip
   local_data_file: artifact/data_ingestion/data.zip
   unzip_dir: artifact/data_ingestion
+
+
+
+data_validation:
+ root_dir: artifact/data_validation
+ data_file: artifact/data_ingestion/winequality-red.csv
+ status: artifact/data_validation/status.txt
+ schema_file: config/schema.yaml
+

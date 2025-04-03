@@ -5,7 +5,7 @@ from src.components.data_ingestion import DataIngestion
 from src.exception import CustomException
 from src.logger import logging
 
- 
+STAGE_NAME = 'data ingestion'
 
 class DataIngestionPipeline:
     def __init__(self):
