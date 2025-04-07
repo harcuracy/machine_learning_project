@@ -16,6 +16,7 @@ class DataTransformation:
         try:
             logging.info("Data Transformation started")
             df = pd.read_csv(self.config.input_file)
+            df.drop(columns=['Id'], inplace=True)
             train_df,test_df = train_test_split(df, random_state=42, test_size=0.2)
             train_df.to_csv(os.path.join(self.config.root_dir, "train.csv"), index=False)
             test_df.to_csv(os.path.join(self.config.root_dir, "test.csv"), index=False)
