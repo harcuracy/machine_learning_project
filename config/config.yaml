@@ -19,3 +19,10 @@ data_transformation:
  root_dir: artifact/data_transformation
  input_file: artifact/data_ingestion/WineQT.csv
 
+
+model_training:
+ root_dir: artifact/model_training
+ train_data_file: artifact/data_transformation/train.csv
+ model_file: artifact/model_training/model.pkl
+ 
+
