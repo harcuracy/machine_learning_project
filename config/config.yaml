@@ -11,7 +11,6 @@ data_ingestion:
 
 data_validation:
  root_dir: artifact/data_validation
- data_file: artifact/data_ingestion/winequality-red.csv
+ data_file: artifact/data_ingestion/WineQT.csv
  status: artifact/data_validation/status.txt
- schema_file: config/schema.yaml
 

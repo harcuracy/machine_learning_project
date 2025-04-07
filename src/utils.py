@@ -3,7 +3,7 @@ import os
 from box import ConfigBox,Box
 import yaml
 from pathlib import Path
-from src.logger import logger
+from src.logger import logger,logging
 
 def create_directory(directory_path):
     """
@@ -18,9 +18,9 @@ def create_directory(directory_path):
     
     if not os.path.exists(directory_path):
         os.makedirs(directory_path)
-        logger.info(f"Directory '{directory_path}' created.")
+        logging.info(f"Directory '{directory_path}' created.")
     else:
-        logger.info(f"Directory '{directory_path}' already exists.")
+        logging.info(f"Directory '{directory_path}' already exists.")
         
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
     """reads yaml file and returns
@@ -38,7 +38,7 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
 
     with open(path_to_yaml) as yaml_file:
             content = yaml.safe_load(yaml_file)
-            logger.info(f"yaml file: {path_to_yaml} loaded successfully")
+            logging.info(f"yaml file: {path_to_yaml} loaded successfully")
             return ConfigBox(content)
     
    
