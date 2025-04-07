@@ -1,7 +1,9 @@
 from src.constant import *
 from src.utils import create_directory, read_yaml
-from src.entity.config_entity import DataIngestionConfig
-from src.entity.config_entity import DataValidationConfig
+from src.entity.config_entity import (DataIngestionConfig,
+                                      DataValidationConfig,
+                                      DataTransformationConfig)
+
 
 
 class ConfigurationManager:
@@ -41,5 +43,16 @@ class ConfigurationManager:
         )
         
         return data_validation_config
+    
+    def get_data_transformation_config(self):
+        config = self.config.data_transformation
+        
+        create_directory(config.root_dir)
+        
+        data_transformation_config = DataTransformationConfig(
+            root_dir=config.root_dir,
+            input_file= config.input_file
+        )
+        return data_transformation_config
         
         

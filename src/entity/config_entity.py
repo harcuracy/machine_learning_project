@@ -25,3 +25,14 @@ class DataValidationConfig:
     data_file: Path
     status: str
     all_schema: dict
+    
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    """
+    Data Transformation Configuration
+    """
+
+    root_dir: Path
+    input_file: Path
+    
