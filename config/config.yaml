@@ -24,5 +24,12 @@ model_training:
  root_dir: artifact/model_training
  train_data_file: artifact/data_transformation/train.csv
  model_file: artifact/model_training/model.joblib
+
+model_evaluation:
+ root_dir: artifact/model_evaluation
+ test_data_file: artifact/data_transformation/test.csv
+ model_file: artifact/model_training/model.joblib
+ report_file: artifact/model_evaluation/report.json
+ mlflow_tracking_uri: https://dagshub.com/harcuracy/machine_learning_project.mlflow
  
 

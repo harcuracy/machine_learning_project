@@ -50,4 +50,14 @@ class ModelTrainingConfig:
     all_params: dict
     target_column: str
     
+@dataclass (frozen=True)
+class ModelEvaluationConfig:
+    root_dir:Path
+    model_file:Path
+    test_data_file:Path
+    report_file:Path
+    target_column: str
+    mlflow_tracking_uri: str
+    all_params: dict
+    
     

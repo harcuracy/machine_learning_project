@@ -3,7 +3,7 @@ from src.utils import create_directory, read_yaml
 from src.entity.config_entity import (DataIngestionConfig,
                                       DataValidationConfig,
                                       DataTransformationConfig,
-                                      ModelTrainingConfig)
+                                      ModelTrainingConfig,ModelEvaluationConfig)
 
 
 
@@ -81,5 +81,21 @@ class ConfigurationManager:
         
         return model_training_config
         
+    def get_evaluation_config(self)-> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        target_column = self.schema.TARGET_COLUMN.name
+        all_param = self.params.PARAMETERS.model.params
         
+        create_directory(config.root_dir)
+        
+        model_trainer_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            model_file=config.model_file,
+            test_data_file=config.test_data_file,
+            report_file=config.report_file,
+            target_column=target_column,
+            all_params=all_param,
+            mlflow_tracking_uri=config.mlflow_tracking_uri
+        )
+        return model_trainer_config   
         

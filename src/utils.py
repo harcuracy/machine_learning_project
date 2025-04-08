@@ -2,6 +2,7 @@ import requests
 import os
 from box import ConfigBox,Box
 import yaml
+import json
 from pathlib import Path
 from src.logger import logger,logging
 
@@ -42,4 +43,7 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
             return ConfigBox(content)
     
    
-         
+def save_json(data: dict, filepath: str):
+    with open(filepath, "w") as f:
+        json.dump(data, f, indent=4)
+    logging.info(f"json file: {filepath} saved successfully")       
