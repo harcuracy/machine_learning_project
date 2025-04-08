@@ -23,6 +23,6 @@ data_transformation:
 model_training:
  root_dir: artifact/model_training
  train_data_file: artifact/data_transformation/train.csv
- model_file: artifact/model_training/model.pkl
+ model_file: artifact/model_training/model.joblib
  
 

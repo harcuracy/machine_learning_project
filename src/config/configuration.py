@@ -2,7 +2,8 @@ from src.constant import *
 from src.utils import create_directory, read_yaml
 from src.entity.config_entity import (DataIngestionConfig,
                                       DataValidationConfig,
-                                      DataTransformationConfig)
+                                      DataTransformationConfig,
+                                      ModelTrainingConfig)
 
 
 
@@ -10,9 +11,11 @@ class ConfigurationManager:
     def __init__(self, 
                  config_file_path=CONFIG_FILE_PATH,
                  schema_file_path=SCHEMA_FILE_PATH,
+                 params_file_path=PARAMS_FILE_PATH,
                  ):
         self.config = read_yaml(config_file_path)
         self.schema = read_yaml(schema_file_path)
+        self.params = read_yaml(params_file_path)
                 
         create_directory(self.config.artifact_root)
         
@@ -54,5 +57,29 @@ class ConfigurationManager:
             input_file= config.input_file
         )
         return data_transformation_config
+    
+    def get_model_trainer_config(self) -> ModelTrainingConfig:
+        """
+        Returns the Model Training Configuration
+        """
+        root_dir = self.config.model_training.root_dir
+        all_params = self.params.PARAMETERS.model.params
+        target_column = self.schema.TARGET_COLUMN.name
+        train_data_file = self.config.model_training.train_data_file
+        model_file = self.config.model_training.model_file
+        
+        
+        create_directory(self.config.model_training.root_dir)
+        
+        model_training_config = ModelTrainingConfig(
+            root_dir=root_dir,
+            train_data_file=train_data_file,
+            model_file=model_file,
+            all_params=all_params,
+            target_column=target_column
+        )
+        
+        return model_training_config
+        
         
         

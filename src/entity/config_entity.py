@@ -36,3 +36,18 @@ class DataTransformationConfig:
     root_dir: Path
     input_file: Path
     
+    
+    
+@dataclass(frozen=True)
+class ModelTrainingConfig:
+    """
+    Data Model Training Configuration
+    """
+
+    root_dir: Path
+    train_data_file: Path
+    model_file: Path
+    all_params: dict
+    target_column: str
+    
+    

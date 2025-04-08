@@ -1,9 +1,9 @@
 import sys
 
 from src.config.configuration import ConfigurationManager
-from src.components.data_transformation import DataTransformation
 from src.logger import logging
 from src.exception import CustomException
+from src.components.data_transformation import DataTransformation
 
 
 STAGE_NAME = "Data Transformation"
