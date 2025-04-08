@@ -66,7 +66,9 @@ open up you local host and port
 url = https://dagshub.com/harcuracy/machine_learning_project.mlflow
 
 
-import mlflowimport dagshub
+import mlflow
+import dagshub
+
 dagshub.init(repo_owner='harcuracy', repo_name='machine_learning_project', mlflow=True)
 
 with mlflow.start_run():
