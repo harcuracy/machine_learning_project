@@ -1,164 +1,155 @@
-# End-to-end-Machine-Learning-Project-with-MLflow
+# Wine Quality Prediction - End-to-End ML Project with MLflow
 
+## Project Overview
+This project implements an end-to-end machine learning pipeline for predicting wine quality based on physicochemical properties. The project uses MLflow for experiment tracking and includes a Streamlit web interface for real-time predictions.
 
-## Workflows
+## Tech Stack Used
+- Python 3.9
+- MLflow for experiment tracking
+- DagsHub for MLflow server hosting
+- Streamlit for web interface
+- Scikit-learn for machine learning (ElasticNet model)
+- Docker for containerization
+- AWS for deployment (EC2 & ECR)
+- Github Actions for CI/CD
 
-1. Update config.yaml
-2. Update schema.yaml
-3. Update params.yaml
-4. Update the entity
-5. Update the configuration manager in src config
-6. Update the components
-7. Update the pipeline 
-8. Update the main.py
-9. Update the app.py
-
-
-
-# How to run?
-### STEPS:
-
-Clone the repository
-
-```bash
-https://github.com/harcuracy/machine_learning_project
+## Project Structure
 ```
-### STEP 01- Create a conda environment after opening the repository
+├── .github/workflows    # Github Actions workflows
+├── artifact            # Storage for all pipeline artifacts
+├── config             # Configuration files
+├── logs               # Log files
+├── notebook           # Jupyter notebooks for experimentation
+├── research           # Research and development notebooks
+├── src                # Source code
+│   ├── components     # Core components of the ML pipeline
+│   ├── config        # Configuration management
+│   ├── pipeline      # Pipeline modules
+│   ├── utils.py      # Utility functions
+│   ├── logger.py     # Logging configuration
+│   └── exception.py  # Custom exception handling
+├── app.py            # Streamlit web application
+├── main.py           # Main pipeline execution script
+├── params.yaml       # Model parameters
+├── schema.yaml       # Data schema
+└── setup.py          # Project setup file
+```
 
+## Project Workflows
+1. Data Ingestion
+2. Data Validation
+3. Data Transformation
+4. Model Training
+5. Model Evaluation
+6. Model Deployment
+7. Prediction Pipeline
+8. Web Application
+
+## Getting Started
+
+### Prerequisites
+- Python 3.9
+- Git
+- Docker (for containerization)
+- AWS Account (for deployment)
+
+### Installation Steps
+
+1. Clone the repository
+```bash
+git clone https://github.com/harcuracy/machine_learning_project
+```
+
+2. Create and activate conda environment
 ```bash
 conda create -n mlproj python=3.8 -y
-```
-
-```bash
 conda activate mlproj
 ```
 
-
-### STEP 02- install the requirements
+3. Install requirements
 ```bash
 pip install -r requirements.txt
 ```
 
-
+4. Run the application
 ```bash
-# Finally run the following command
-python app.py
+# Run Streamlit app
+streamlit run app.py
 ```
 
-Now,
-```bash
-open up you local host and port
-```
+### MLflow Tracking
+The project uses MLflow for experiment tracking. To view the MLflow UI:
 
-
-
-## MLflow
-
-[Documentation](https://mlflow.org/docs/latest/index.html)
-
-
-##### cmd
-- mlflow ui
-
-### dagshub
-[dagshub](https://dagshub.com/)#
-
-url = https://dagshub.com/harcuracy/machine_learning_project.mlflow
-
-
+1. Set up DagsHub tracking:
+```python
 import mlflow
 import dagshub
 
 dagshub.init(repo_owner='harcuracy', repo_name='machine_learning_project', mlflow=True)
+```
 
-with mlflow.start_run():
-  mlflow.log_param('parameter name', 'value')
-  mlflow.log_metric('metric name', 1)
+2. Access MLflow UI through DagsHub:
+```
+https://dagshub.com/harcuracy/machine_learning_project.mlflow
+```
 
+## Model Features
+The model predicts wine quality based on the following features:
+- Fixed Acidity
+- Volatile Acidity
+- Citric Acid
+- Residual Sugar
+- Chlorides
+- Free Sulfur Dioxide
+- Total Sulfur Dioxide
+- Density
+- pH
+- Sulphates
+- Alcohol
 
+## AWS Deployment Steps
 
+1. Login to AWS console
 
-# AWS-CICD-Deployment-with-Github-Actions
+2. Create IAM user for deployment
+   - EC2 access
+   - ECR: Elastic Container registry access
 
-## 1. Login to AWS console.
+3. Create ECR repository
+   ```
+   URI: 566373416292.dkr.ecr.ap-south-1.amazonaws.com/mlproj
+   ```
 
-## 2. Create IAM user for deployment
+4. Create EC2 machine (Ubuntu)
 
-	#with specific access
+5. Install Docker on EC2
+   ```bash
+   curl -fsSL https://get.docker.com -o get-docker.sh
+   sudo sh get-docker.sh
+   sudo usermod -aG docker ubuntu
+   newgrp docker
+   ```
 
-	1. EC2 access : It is virtual machine
+6. Configure EC2 as self-hosted runner
+   - Navigate to GitHub Actions
+   - Add new self-hosted runner
+   - Follow setup instructions
 
-	2. ECR: Elastic Container registry to save your docker image in aws
+7. Setup GitHub Secrets
+   ```
+   AWS_ACCESS_KEY_ID=
+   AWS_SECRET_ACCESS_KEY=
+   AWS_REGION=us-east-1
+   AWS_ECR_LOGIN_URI=566373416292.dkr.ecr.ap-south-1.amazonaws.com
+   ECR_REPOSITORY_NAME=mlproj
+   ```
 
+## Author
+Akande Soji
 
-	#Description: About the deployment
+## Contact
+- Email: akandesoji4christ@gmail.com
+- GitHub: [harcuracy](https://github.com/harcuracy)
 
-	1. Build docker image of the source code
-
-	2. Push your docker image to ECR
-
-	3. Launch Your EC2 
-
-	4. Pull Your image from ECR in EC2
-
-	5. Lauch your docker image in EC2
-
-	#Policy:
-
-	1. AmazonEC2ContainerRegistryFullAccess
-
-	2. AmazonEC2FullAccess
-
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 566373416292.dkr.ecr.ap-south-1.amazonaws.com/mlproj
-
-	
-## 4. Create EC2 machine (Ubuntu) 
-
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
-
-	sudo apt-get update -y
-
-	sudo apt-get upgrade
-	
-	#required
-
-	curl -fsSL https://get.docker.com -o get-docker.sh
-
-	sudo sh get-docker.sh
-
-	sudo usermod -aG docker ubuntu
-
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
-
-
-# 7. Setup github secrets:
-
-    AWS_ACCESS_KEY_ID=
-
-    AWS_SECRET_ACCESS_KEY=
-
-    AWS_REGION = us-east-1
-
-    AWS_ECR_LOGIN_URI = demo>>  566373416292.dkr.ecr.ap-south-1.amazonaws.com
-
-    ECR_REPOSITORY_NAME = simple-app
-
-
-
-
-## About MLflow 
-MLflow
-
- - Its Production Grade
- - Trace all of your expriements
- - Logging & tagging your model
-
-
+## License
+This project is licensed under the MIT License - see the LICENSE file for details

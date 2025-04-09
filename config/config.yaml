@@ -31,5 +31,5 @@ model_evaluation:
  model_file: artifact/model_training/model.joblib
  report_file: artifact/model_evaluation/report.json
  mlflow_tracking_uri: https://dagshub.com/harcuracy/machine_learning_project.mlflow
- 
+
 

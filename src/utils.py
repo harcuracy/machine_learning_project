@@ -2,9 +2,12 @@ import requests
 import os
 from box import ConfigBox,Box
 import yaml
+from src.exception import CustomException
 import json
 from pathlib import Path
 from src.logger import logger,logging
+import joblib
+import sys
 
 def create_directory(directory_path):
     """
@@ -46,4 +49,12 @@ def read_yaml(path_to_yaml: Path) -> ConfigBox:
 def save_json(data: dict, filepath: str):
     with open(filepath, "w") as f:
         json.dump(data, f, indent=4)
-    logging.info(f"json file: {filepath} saved successfully")       
+    logging.info(f"json file: {filepath} saved successfully")
+
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return joblib.load(file_obj)
+    except Exception as e:
+        logging.error("Exception Occurred in load_object function utils")
+        raise CustomException(e, sys)
